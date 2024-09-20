@@ -37,6 +37,22 @@ import PrimaryButton from "@/components/primary-button.astro";
 import Values from "@/components/values.astro";
 import MailingList from "@/components/mailing-list.astro";
 
+import { GoogleReviewsApiClient } from "../utils/google-reviews-api-client";
+
+const client = new GoogleReviewsApiClient();
+
+client
+  .getReviewsV2()
+  .then((result) => {
+    console.log(result);
+    result.forEach((location) => {
+      if (location) {
+        location.reviews.forEach((review) => console.log(review));
+      }
+    });
+  })
+  .catch((err) => console.log(err));
+
 const locations = [
   {
     icon: location1,
