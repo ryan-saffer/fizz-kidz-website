@@ -14,11 +14,13 @@ import { cn } from "../lib/utils";
 import { useEffect, useRef, useState } from "react";
 
 export type MenuItem =
-  | { type: "link"; title: string; path: string }
+  | { type: "link"; title: string; path: string; isNew: boolean }
   | ({
       type: "dropdown";
       title: string;
-      items: Readonly<{ type: "link"; title: string; path: string }[]>;
+      items: Readonly<
+        { type: "link"; title: string; path: string; isNew: boolean }[]
+      >;
     } & (
       | { clickable: true; path: string; subTitle: string }
       | { clickable: false }
@@ -36,51 +38,61 @@ export const menu = [
         title: "Glam Parties",
         path: "/birthday-parties/glam-parties/",
         type: "link",
+        isNew: false,
       },
       {
         title: "Science Parties",
         path: "/birthday-parties/science-parties/",
         type: "link",
+        isNew: false,
       },
       {
         title: "Slime Parties",
         path: "/birthday-parties/slime-parties/",
         type: "link",
+        isNew: false,
       },
       {
         title: "Fairy Parties",
         path: "/birthday-parties/fairy-parties",
         type: "link",
+        isNew: true,
       },
       {
         title: "Fluid Bears Parties",
         path: "/birthday-parties/fluid-bears-parties",
         type: "link",
+        isNew: true,
       },
       {
         title: "Safari Parties",
         path: "/birthday-parties/safari-parties/",
         type: "link",
+        isNew: false,
       },
       {
         title: "Unicorn Parties",
         path: "/birthday-parties/unicorn-parties/",
         type: "link",
+        isNew: true,
       },
       {
         title: "Tie Dye Parties",
         path: "/birthday-parties/tie-dye-parties/",
         type: "link",
+        isNew: false,
       },
       {
         title: "Taylor Swift Parties",
         path: "/birthday-parties/taylor-swift-parties/",
         type: "link",
+        isNew: false,
       },
       {
         title: "At Home Parties",
         path: "/birthday-parties/at-home-parties/",
         type: "link",
+        isNew: false,
       },
     ],
   },
@@ -88,6 +100,7 @@ export const menu = [
     type: "link",
     title: "Holiday programs",
     path: "/holiday-programs/",
+    isNew: false,
   },
   // {
   //   type: "dropdown",
@@ -117,16 +130,23 @@ export const menu = [
         type: "link",
         title: "After school programs",
         path: "/in-schools/after-school-programs/",
+        isNew: false,
       },
-      { type: "link", title: "Incursions", path: "/in-schools/incursions/" },
+      {
+        type: "link",
+        title: "Incursions",
+        path: "/in-schools/incursions/",
+        isNew: false,
+      },
     ],
   },
   {
     title: "Activations and events",
     type: "link",
     path: "/activations-and-events/",
+    isNew: false,
   },
-  { type: "link", title: "Careers", path: "/careers/" },
+  { type: "link", title: "Careers", path: "/careers/", isNew: false },
   // { title: "Franchising", type: "link", path: "/franchising/" },
   {
     title: "Fizz facts",
@@ -137,11 +157,12 @@ export const menu = [
         type: "link",
         title: "Contact Us",
         path: "/contact-us/",
+        isNew: false,
       },
-      { type: "link", title: "Locations", path: "/locations/" },
-      { type: "link", title: "Our Team", path: "/our-team/" },
+      { type: "link", title: "Locations", path: "/locations/", isNew: false },
+      { type: "link", title: "Our Team", path: "/our-team/", isNew: false },
       // { type: "link", title: "Franchising", path: "/franchising" },
-      { type: "link", title: "Policies", path: "/policies/" },
+      { type: "link", title: "Policies", path: "/policies/", isNew: false },
     ],
   },
 ] as const satisfies MenuItem[];
@@ -196,6 +217,7 @@ function NavigationMenu() {
                 key={menuItem.title}
                 title={menuItem.title}
                 path={menuItem.path}
+                showNewBadge={menuItem.isNew}
               />
             );
           } else if (menuItem.type === "dropdown") {
@@ -270,6 +292,7 @@ function NavigationMenu() {
                             key={item.title}
                             title={item.title}
                             path={item.path}
+                            showNewBadge={item.isNew}
                             nested
                           />
                         ))}
@@ -282,6 +305,7 @@ function NavigationMenu() {
                       key={menuItem.title}
                       title={menuItem.title}
                       path={menuItem.path}
+                      showNewBadge={menuItem.isNew}
                       nested={false}
                     />
                   );

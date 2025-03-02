@@ -18,12 +18,12 @@ function NavigationMenuDropdown({
   subtitle?: string;
   submenus: Readonly<
     (
-      | { type: "link"; title: string; path: string }
+      | { type: "link"; title: string; path: string; isNew: boolean }
       | {
           type: "dropdown";
           title: string;
           path?: string;
-          items: Readonly<{ title: string; path: string }[]>;
+          items: Readonly<{ title: string; path: string; isNew: boolean }[]>;
         }
     )[]
   >;
@@ -77,6 +77,7 @@ function NavigationMenuDropdown({
               <NavigationMenuItemDesktop
                 path={menu.path}
                 title={menu.title}
+                showNewBadge={menu.isNew}
                 key={idx}
                 className={isBreadcrumb ? "text-sm sm:text-base" : ""}
               />
