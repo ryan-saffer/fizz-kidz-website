@@ -13,6 +13,7 @@ function NavigationMenuDropdown({
   submenus,
   path,
   isBreadcrumb = false,
+  variant = "standard",
 }: {
   title: string;
   path?: string;
@@ -30,6 +31,7 @@ function NavigationMenuDropdown({
   >;
   delay?: number;
   isBreadcrumb?: boolean;
+  variant?: "standard" | "white";
 }) {
   const [open, setOpen] = useState(false);
 
@@ -41,18 +43,26 @@ function NavigationMenuDropdown({
           variant="ghost"
           className={cn("group relative font-gotham hover:bg-transparent", {
             "-ml-2 font-sans font-normal": isBreadcrumb,
+            "text-white": variant === "white",
           })}
           onClick={() => setOpen(true)}
         >
           <span
             className={cn(
               "text-sm decoration-[#B34696] decoration-2 underline-offset-4 group-hover:underline",
-              { "text-xs min-[350px]:text-sm": isBreadcrumb },
+              {
+                "text-xs min-[350px]:text-sm": isBreadcrumb,
+                "text-white": variant === "white",
+              },
             )}
           >
             {title}
           </span>
-          <ChevronDown className="ml-2 h-4 w-4" />
+          <ChevronDown
+            className={cn("ml-2 h-4 w-4", {
+              "text-white": variant === "white",
+            })}
+          />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="z-[999] flex w-fit flex-col p-3">
@@ -65,7 +75,9 @@ function NavigationMenuDropdown({
           >
             <a
               href={path}
-              className="flex w-full items-center gap-4 text-start decoration-[#9044E2] decoration-2 underline-offset-4"
+              className={cn(
+                "flex w-full items-center gap-4 text-start decoration-[#9044E2] decoration-2 underline-offset-4",
+              )}
             >
               {subtitle}
               <ArrowRight />

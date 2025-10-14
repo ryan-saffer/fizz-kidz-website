@@ -13,6 +13,7 @@ import type { MenuLink } from "./navigation/navigation-menu";
 
 export function BreadcrumbWrapper({
   items,
+  variant = "standard",
 }: {
   items: (
     | { type: "link"; title: string; path: string }
@@ -23,6 +24,7 @@ export function BreadcrumbWrapper({
         items: Readonly<MenuLink[]>;
       }
   )[];
+  variant?: "standard" | "white";
 }) {
   return (
     <Breadcrumb>
@@ -30,12 +32,21 @@ export function BreadcrumbWrapper({
         <BreadcrumbItem
           className={cn("text-xs min-[350px]:text-sm sm:block", {
             "hidden sm:block": items.length > 1,
+            "text-white": variant === "white",
           })}
         >
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbLink
+            href="/"
+            className={cn({ "hover:text-white": variant === "white" })}
+          >
+            Home
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator
-          className={cn("sm:block", { "hidden sm:block": items.length > 1 })}
+          className={cn("sm:block", {
+            "hidden sm:block": items.length > 1,
+            "text-white": variant === "white",
+          })}
         />
         {items.map((child, idx) => {
           let result;
@@ -43,7 +54,9 @@ export function BreadcrumbWrapper({
             result = (
               <BreadcrumbItem>
                 <BreadcrumbLink
-                  className="text-xs min-[350px]:text-sm"
+                  className={cn("text-xs min-[350px]:text-sm", {
+                    "text-white": variant === "white",
+                  })}
                   href={child.path}
                 >
                   {child.title}
@@ -54,7 +67,12 @@ export function BreadcrumbWrapper({
             result = (
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <span className="text-xs min-[350px]:text-sm">
+                  <span
+                    className={cn("text-xs min-[350px]:text-sm", {
+                      "text-white": variant === "white",
+                      "hover:text-white": variant === "white",
+                    })}
+                  >
                     {child.title}
                   </span>
                 </BreadcrumbLink>
@@ -69,6 +87,7 @@ export function BreadcrumbWrapper({
                   submenus={child.items}
                   delay={400}
                   isBreadcrumb
+                  variant={variant}
                 />
               </BreadcrumbItem>
             );
@@ -76,7 +95,11 @@ export function BreadcrumbWrapper({
           return (
             <Fragment key={idx}>
               {result}
-              {idx !== items.length - 1 && <BreadcrumbSeparator />}
+              {idx !== items.length - 1 && (
+                <BreadcrumbSeparator
+                  className={cn({ "text-white": variant === "white" })}
+                />
+              )}
             </Fragment>
           );
         })}
