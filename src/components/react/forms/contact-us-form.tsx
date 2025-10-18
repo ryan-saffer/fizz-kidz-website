@@ -40,6 +40,7 @@ const formSchema = z
         "holiday-program",
         "after-school-program",
         "incursion",
+        "school-celebration",
         "activation",
         "other",
       ])
@@ -227,6 +228,9 @@ function ContactUsForm() {
                     After School Program
                   </SelectItem>
                   <SelectItem value="incursion">School Incursion</SelectItem>
+                  <SelectItem value="school-celebration">
+                    School Celebration
+                  </SelectItem>
                   <SelectItem value="activation">
                     Activation and Events
                   </SelectItem>
