@@ -214,15 +214,18 @@ const staffOptimised = await getImage({
     </div>
   </Container>
   <div
-    style={`background-image: url(${creativeKindersOptimised.src})`}
+    style={`background-image: linear-gradient(rgba(62,168,89,0.9), rgba(62,168,89,0.9)), url(${creativeKindersOptimised.src})`}
     class="relative bg-cover"
   >
     <Image src={clouds} alt="" class="absolute top-0 -mt-1 rotate-180" />
+    <div class="h-full w-screen bg-[#3EA859]"></div>
     <Container class="flex justify-center">
       <div
-        class="flex max-w-3xl flex-col items-center justify-center gap-8 py-16 md:py-48"
+        class="flex max-w-3xl flex-col items-center justify-center gap-8 py-24 md:py-48 lg:pt-80"
       >
-        <p class="text-center font-lilita text-5xl uppercase text-white">
+        <p
+          class="text-center font-lilita text-4xl uppercase text-white md:text-6xl"
+        >
           From big to small, we have you covered
         </p>
         <p class="text-center font-gotham text-lg text-white">
