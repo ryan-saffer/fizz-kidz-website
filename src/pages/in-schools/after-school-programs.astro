@@ -9,6 +9,7 @@ import WhyChooseScienceProgram from "@/components/why-choose-science-program.ast
 import SchoolLogos from "@/components/school-logos.astro";
 import Reviews from "@/components/reviews.astro";
 import Values from "@/components/values.astro";
+import { menu } from "@/components/react/navigation/navigation-menu";
 ---
 
 <Layout
@@ -23,20 +24,7 @@ import Values from "@/components/values.astro";
         {
           type: "dropdown",
           title: "After School Programs",
-          items: [
-            {
-              type: "link",
-              title: "After School Programs",
-              path: "/in-schools/after-school-programs/",
-              isNew: false,
-            },
-            {
-              type: "link",
-              title: "Incursions",
-              path: "/in-schools/incursions/",
-              isNew: false,
-            },
-          ],
+          items: menu[3].items,
         },
       ]}
     />

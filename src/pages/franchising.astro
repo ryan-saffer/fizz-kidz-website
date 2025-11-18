@@ -54,11 +54,17 @@ import studio5 from "@/assets/images/pages/franchising/studio-5.png";
 import whiteSlime from "@/assets/images/pages/franchising/white-slime.svg";
 
 import Layout from "@/layout/Layout.astro";
-import FranchisingHero from "@/components/image-clips/franchising-hero.astro";
 import StackedBubbles from "@/components/image-clips/stacked-bubbles.astro";
 import FaqAccordion from "@/components/react/faq-accordion";
 import { Button } from "@/components/react/ui/button";
 import FranchisingForm from "@/components/react/forms/franchising-form";
+import { DropImage } from "@/components/react/drop-image";
+import { getImage } from "astro:assets";
+
+const staffOptimised = await getImage({
+  src: staff,
+  format: "webp",
+});
 ---
 
 <style lang="css">
@@ -128,7 +134,11 @@ import FranchisingForm from "@/components/react/forms/franchising-form";
         </a>
       </div>
       <div class="hidden w-full lg:block lg:w-1/2">
-        <FranchisingHero img={staff} alt="two staff smiling" />
+        <DropImage
+          image={{ image: staffOptimised, alt: "two staff smiling" }}
+          color="#8F44E1"
+          background="#45D3F3"
+        />
       </div>
     </div>
   </div>
@@ -510,7 +520,7 @@ import FranchisingForm from "@/components/react/forms/franchising-form";
     </div>
   </div>
   <div class="relative">
-    <Image src={purpleCurve} alt="" class="absolute rotate-180" />
+    <Image src={purpleCurve} alt="" class="absolute -mt-1 rotate-180" />
     <Image
       src={team}
       alt=""
