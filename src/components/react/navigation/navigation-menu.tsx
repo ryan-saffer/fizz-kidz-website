@@ -155,6 +155,12 @@ export const menu = [
         path: "/in-schools/incursions/",
         isNew: false,
       },
+      {
+        type: "link",
+        title: "School Celebrations",
+        path: "/in-schools/celebrations",
+        isNew: true,
+      },
     ],
   },
   {
