@@ -42,6 +42,11 @@ import Values from "@/components/values.astro";
 import FaqAccordion from "@/components/react/faq-accordion";
 import ImageCarousel from "@/components/react/image-carousel";
 import faq from "@/assets/images/pages/parties/faq.png";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
 
 const sessionSlots = [
   {
@@ -125,11 +130,58 @@ const funCarouselImages = [
     alt: "Child participating in a Preschool Program activity",
   },
 ];
+
+const preschoolFaqItems = [
+  {
+    question: "How do I book a session?",
+    answer:
+      "You can book online through our website, or contact us directly and we'll help you find a time that works best for you and your child.",
+  },
+  {
+    question: "What age group is the Preschool Program for?",
+    answer:
+      "The Preschool Program is designed for children aged 2.5 to 5 years old. Activities are thoughtfully adapted to suit each developmental stage, so children can build confidence, creativity, and school readiness in every session.",
+  },
+  {
+    question: "Do I stay with my child during the session?",
+    answer:
+      "No, the Preschool Program is designed as a drop-off program. During your free trial, you'll have a chance to meet the team, explore the environment, and see how your child settles into the session.",
+  },
+  {
+    question: "What types of activities do you run?",
+    answer:
+      "Each session includes a mix of art, science, sensory, and craft-based activities. For younger children, the focus is on exploration and play. For older children, we introduce elements of creative thinking, self-expression, and take-home projects.",
+  },
+  {
+    question: "How long is each session?",
+    answer: "Each Preschool Program session runs from 9:30 AM to 11:30 AM.",
+  },
+  {
+    question: "My child has special needs. Is this program appropriate?",
+    answer:
+      "Absolutely. We welcome all children and are passionate about creating an inclusive, supportive environment for every child. We encourage you to call us so we can chat about how best to support your child in the Preschool Program.",
+  },
+];
 ---
 
 <Layout
-  title="Browse and book the Preschool Program for children aged 2.5 to 5 years. | Fizz Kidz"
-  description="Build confidence and school readiness with the Fizz Kidz Preschool Program for children aged 2.5 to 5 years."
+  title="Preschool Program Melbourne | School Readiness | Fizz Kidz"
+  description="Build confidence and school readiness with the Fizz Kidz Preschool Program for children aged 2.5 to 5 years, with art, science and sensory play."
+  schema={[
+    createServiceSchema({
+      name: "Preschool Program Melbourne",
+      description:
+        "A drop-off preschool program for children aged 2.5 to 5 years, focused on school readiness, art, science, sensory play and confidence building.",
+      url: "/preschool-program/",
+      serviceType: "Preschool program",
+      areaServed: ["Melbourne", "Essendon", "Kingsville"],
+    }),
+    createFaqSchema("/preschool-program/", preschoolFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Preschool Program", url: "/preschool-program/" },
+    ]),
+  ]}
 >
   <Container class="mb:20 pt-4 md:mb-40">
     <BreadcrumbWrapper
@@ -897,42 +949,7 @@ const funCarouselImages = [
             alt="Three girls smiling"
           />
           <div class="w-full md:w-3/5">
-            <FaqAccordion
-              client:idle
-              items={[
-                {
-                  question: "How do I book a session?",
-                  answer:
-                    "You can book online through our website, or contact us directly and we'll help you find a time that works best for you and your child.",
-                },
-                {
-                  question: "What age group is the Preschool Program for?",
-                  answer:
-                    "The Preschool Program is designed for children aged 2.5 to 5 years old. Activities are thoughtfully adapted to suit each developmental stage, so children can build confidence, creativity, and school readiness in every session.",
-                },
-                {
-                  question: "Do I stay with my child during the session?",
-                  answer:
-                    "No, the Preschool Program is designed as a drop-off program. During your free trial, you'll have a chance to meet the team, explore the environment, and see how your child settles into the session.",
-                },
-                {
-                  question: "What types of activities do you run?",
-                  answer:
-                    "Each session includes a mix of art, science, sensory, and craft-based activities. For younger children, the focus is on exploration and play. For older children, we introduce elements of creative thinking, self-expression, and take-home projects.",
-                },
-                {
-                  question: "How long is each session?",
-                  answer:
-                    "Each Preschool Program session runs from 9:30 AM to 11:30 AM.",
-                },
-                {
-                  question:
-                    "My child has special needs. Is this program appropriate?",
-                  answer:
-                    "Absolutely. We welcome all children and are passionate about creating an inclusive, supportive environment for every child. We encourage you to call us so we can chat about how best to support your child in the Preschool Program.",
-                },
-              ]}
-            />
+            <FaqAccordion client:idle items={preschoolFaqItems} />
           </div>
         </div>
         <div class="mt-12 flex w-full justify-center sm:mt-6">

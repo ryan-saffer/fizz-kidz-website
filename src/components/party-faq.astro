@@ -2,6 +2,39 @@
 import { Image } from "astro:assets";
 import faq from "@/assets/images/pages/parties/faq.png";
 import FaqAccordion from "./react/faq-accordion";
+
+type FaqItem = { question: string; answer: string };
+
+const defaultItems: FaqItem[] = [
+  {
+    question: "When do I choose my creations?",
+    answer: "10 days before your childs upcoming party!",
+  },
+  {
+    question: "When do I let you know numbers?",
+    answer:
+      "10 days before your childs upcoming party. We will only charge you for the number of kids that turn up!",
+  },
+  {
+    question: "Can I change the party food if I like?",
+    answer: "Yes we have options!",
+  },
+  {
+    question: "When do you take payment?",
+    answer: "At the end of the party. We do not take any deposit.",
+  },
+  {
+    question: "Can we bring food for parents?",
+    answer:
+      "Sure, please make sure it's nut free and let us know before the party.",
+  },
+  {
+    question: "Can parents stay during the party?",
+    answer: "Sure, parents can stay or drop off.",
+  },
+];
+
+const { items = defaultItems } = Astro.props as { items?: FaqItem[] };
 ---
 
 <section class="my-12 md:my-24">
@@ -11,37 +44,7 @@ import FaqAccordion from "./react/faq-accordion";
   <div class="flex w-full flex-col items-center gap-8 md:flex-row">
     <Image class="hidden w-2/5 md:block" src={faq} alt="Three girls smiling" />
     <div class="w-full md:w-3/5">
-      <FaqAccordion
-        client:idle
-        items={[
-          {
-            question: "When do I choose my creations?",
-            answer: "10 days before your childs upcoming party!",
-          },
-          {
-            question: "When do I let you know numbers?",
-            answer:
-              "10 days before your childs upcoming party. We will only charge you for the number of kids that turn up!",
-          },
-          {
-            question: "Can I change the party food if I like?",
-            answer: "Yes we have options!",
-          },
-          {
-            question: "When do you take payment?",
-            answer: "At the end of the party. We do not take any deposit.",
-          },
-          {
-            question: "Can we bring food for parents?",
-            answer:
-              "Sure, please make sure it's nut free and let us know before the party.",
-          },
-          {
-            question: "Can parents stay during the party?",
-            answer: "Sure, parents can stay or drop off.",
-          },
-        ]}
-      />
+      <FaqAccordion client:idle items={items} />
     </div>
   </div>
 </section>

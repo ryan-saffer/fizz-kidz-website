@@ -13,7 +13,9 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.endsWith("/form-result/"),
+    }),
   ],
   redirects: {
     // TEMPORARY WHILE WE NO LONGER OFFER IN STUDIO SCIENCE

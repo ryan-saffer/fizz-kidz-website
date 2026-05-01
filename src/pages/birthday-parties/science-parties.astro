@@ -6,6 +6,7 @@ import PartyLayout from "@/layout/party-layout.astro";
 import scienceParty from "@/assets/images/pages/parties/science-party.jpg";
 import science from "@/assets/images/pages/parties/packages/science.png";
 import Creations from "@/components/party-package-creations.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
 import BubblingVolcanoes from "@/components/creations/bubbling-volcanoes.astro";
 import BugsInBathBombs from "@/components/creations/bugs-in-bath-bombs.astro";
 import MonsterSlimeGreen from "@/components/creations/monster-slime-green.astro";
@@ -15,11 +16,62 @@ import DinosaurBathBombs from "@/components/creations/dinosaur-bath-bombs.astro"
 import FluffySlimeBlue from "@/components/creations/fluffy-slime-blue.astro";
 import MonsterBrains from "@/components/creations/monster-brains.astro";
 import DinosaurSoap from "@/components/creations/dinosaur-soap.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const scienceFaqItems = [
+  {
+    question: "Where can I book a kids science birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs kids science birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Science party?",
+    answer:
+      "Children can make hands-on science creations such as bubbling volcanoes, monster slime, dinosaur fossils, jelly soap, bath bombs and more.",
+  },
+  {
+    question: "Is this a STEM birthday party?",
+    answer:
+      "Yes. The Science party is a fun, hands-on STEM-style birthday party where children explore experiments, reactions and creative science activities.",
+  },
+  {
+    question: "What age is a Science party best for?",
+    answer:
+      "Fizz Kidz Science parties are designed for children aged 4 to 12 years who love experiments, making, mess and discovery.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Science Birthday Party in Melbourne | Fizz Kidz"
-  description="Does your kid love science, experimenting, and making a mess? Then this party package is for them!"
+  title="Kids Science Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids science birthday party in Melbourne with hands-on experiments, slime, volcanoes, dinosaur fossils and take-home STEM creations."
+  schema={[
+    createServiceSchema({
+      name: "Kids Science Birthday Party Melbourne",
+      description:
+        "A hands-on kids science and STEM birthday party with experiments, slime, volcanoes, dinosaur fossils and take-home creations.",
+      url: "/birthday-parties/science-parties/",
+      serviceType: "Kids science birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/science-parties/", scienceFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "Science Parties", url: "/birthday-parties/science-parties/" },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Science">
     <PageIntro
@@ -34,14 +86,39 @@ import DinosaurSoap from "@/components/creations/dinosaur-soap.astro";
     >
       <span slot="title">Kids Science Birthday Parties</span>
       <span slot="content">
-        Fizz Kidz science birthday parties are scientifically proven to be
-        fizzing fantastic!
+        Fizz Kidz science birthday parties are hands-on, experiment-filled and
+        scientifically proven to be fizzing fantastic.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Hands-on science birthday parties"
+      description="The Science party is for kids who love experiments, reactions, slime and discovery. Children get hands-on with creative science activities, make take-home creations and enjoy a high-energy birthday party run by Fizz Kidz hosts."
+      color="#43D4F3"
+      faqHeading="Science party FAQs"
+      faqItems={scienceFaqItems}
+      highlights={[
+        {
+          title: "STEM-style fun",
+          content:
+            "Kids explore hands-on experiments, reactions and creative science activities.",
+        },
+        {
+          title: "Take-home creations",
+          content:
+            "Party options include slime, volcanoes, dinosaur fossils, bath bombs, jelly soap and more.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Science"
       image={science}
       imageAlt="Science Party Package"
+      topSpacing="compact"
     >
       <JellySoap slot="1" flippable={false} />
       <MonsterBrains slot="2" flippable={false} />

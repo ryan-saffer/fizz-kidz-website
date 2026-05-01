@@ -15,11 +15,63 @@ import FizzyBathBombsGreen from "@/components/creations/fizzy-bath-bombs-green.a
 import BubblingVolcanoes from "@/components/creations/bubbling-volcanoes.astro";
 import DinosaurFossils from "@/components/creations/dinosaur-fossils.astro";
 import MonsterBrains from "@/components/creations/monster-brains.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const safariFaqItems = [
+  {
+    question: "Where can I book a safari birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs safari and animal birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Safari party?",
+    answer:
+      "Children can make jungle and animal-inspired creations such as animal soap, monster slime, bugs in bath bombs, dinosaur fossils and bubbling volcanoes.",
+  },
+  {
+    question: "What age is a Safari party best for?",
+    answer:
+      "Fizz Kidz Safari parties are designed for children aged 4 to 12 years who love animals, dinosaurs, slime, science and adventure.",
+  },
+  {
+    question: "Is this party good for kids who like dinosaurs?",
+    answer:
+      "Yes. The Safari package includes dinosaur and jungle-inspired activities, including dinosaur fossils and other animal-themed creations.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Safari Animal Birthday Party in Melbourne | Fizz Kidz"
-  description="This party package will take the kids on a safari adventure!"
+  title="Safari Animal Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids safari animal birthday party in Melbourne with jungle crafts, dinosaur fossils, monster slime, bubbling volcanoes and take-home creations."
+  schema={[
+    createServiceSchema({
+      name: "Safari Animal Birthday Party Melbourne",
+      description:
+        "A kids safari and animal birthday party with jungle craft, dinosaur fossils, monster slime, bubbling volcanoes and take-home creations.",
+      url: "/birthday-parties/safari-parties/",
+      serviceType: "Kids safari birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/safari-parties/", safariFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "Safari Parties", url: "/birthday-parties/safari-parties/" },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Safari">
     <PageIntro
@@ -27,20 +79,46 @@ import MonsterBrains from "@/components/creations/monster-brains.astro";
       subtitle="Roar! Welcome to the jungle!"
       type="image"
       image={safariParty}
-      imageAlt="hands holding colourful body glitter containers"
+      imageAlt="Safari animal birthday party creations"
       actionButtonText="Book a party"
       actionButtonPath="/birthday-parties/book-a-party/#book"
       color="green"
     >
       <span slot="title">Safari Kids Birthday Parties</span>
       <span slot="content">
-        Join the safari adventure and make your own jungle creations!
+        Join the safari adventure and make jungle, animal and dinosaur-inspired
+        creations to take home.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Safari and animal parties for kids"
+      description="The Safari party is a hands-on birthday package for kids who love animals, dinosaurs, jungle adventures and messy creative fun. Children make themed creations, play party games and leave with their own take-home projects."
+      color="#4EE16D"
+      faqHeading="Safari party FAQs"
+      faqItems={safariFaqItems}
+      highlights={[
+        {
+          title: "Animal adventure",
+          content:
+            "A jungle-inspired party for kids who love animals, dinosaurs, volcanoes and slime.",
+        },
+        {
+          title: "Hands-on making",
+          content:
+            "Party options include animal soap, bugs in bath bombs, dinosaur fossils, monster slime and bubbling volcanoes.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Safari"
       image={dinosaurFossils}
       imageAlt="Safari Party Package"
+      topSpacing="compact"
     >
       <AnimalSoap slot="1" flippable={false} />
       <MonsterSlimePurple slot="2" flippable={false} />

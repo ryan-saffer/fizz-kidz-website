@@ -11,6 +11,7 @@ type Props = {
   caption?: string;
   hideLeftImage?: boolean;
   blackBackground?: boolean;
+  topSpacing?: "default" | "compact";
 };
 
 const {
@@ -20,10 +21,16 @@ const {
   caption = "",
   hideLeftImage = false,
   blackBackground = false,
+  topSpacing = "default",
 } = Astro.props;
 ---
 
-<section class="md:mb-26 mb-12 mt-20 md:mt-36">
+<section
+  class={cn("md:mb-26 mb-12", {
+    "mt-20 md:mt-36": topSpacing === "default",
+    "mt-10 md:mt-14": topSpacing === "compact",
+  })}
+>
   <div class="m-auto block max-w-[1380px] px-5 pt-4">
     <h4 class="mb-4 text-center font-lilita text-5xl">
       ✨ {partyPackage} Birthday Party Creations ✨

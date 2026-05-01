@@ -33,6 +33,7 @@ import Reviews from "@/components/reviews.astro";
 import blueBubbles from "@/assets/images/pages/in-schools/incursions/blue-bubbles.png";
 import IncursionForm from "@/components/react/forms/incursion-form";
 import SchoolLogos from "@/components/school-logos.astro";
+import { createBreadcrumbSchema, createServiceSchema } from "@/utils/seo";
 
 const { default: purpleSplot } = await import(
   `@/assets/images/pages/in-schools/incursions/purple-splot.svg?raw`
@@ -81,8 +82,23 @@ const earthImages = [
 ---
 
 <Layout
-  title="School Science Incursions Provider in Melbourne | Fizz Kidz"
-  description="Fizz Kidz runs science incursions at schools across Australia. The perfect way to bring an extra fizz into the classroom!"
+  title="Primary School Science Incursions Melbourne | Fizz Kidz"
+  description="Book hands-on primary school science incursions in Melbourne with Fizz Kidz. Curriculum-aligned workshops, 55-minute sessions and engaging facilitators."
+  schema={[
+    createServiceSchema({
+      name: "Primary School Science Incursions Melbourne",
+      description:
+        "Hands-on, curriculum-aligned science incursions for primary schools, with 55-minute sessions and engaging Fizz Kidz facilitators.",
+      url: "/in-schools/incursions/",
+      serviceType: "Primary school science incursion",
+      areaServed: ["Melbourne", "Victoria"],
+    }),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "In Schools" },
+      { name: "Incursions", url: "/in-schools/incursions/" },
+    ]),
+  ]}
 >
   <main>
     <div class="m-auto block max-w-[1380px] px-5 pt-4">
