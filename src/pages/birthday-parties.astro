@@ -21,6 +21,11 @@ import PartyThemes from "@/components/party-themes.astro";
 import PartyFaq from "@/components/party-faq.astro";
 import Values from "@/components/values.astro";
 import PartyPerks from "@/components/party-perks.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
 
 const { default: greenClock } = await import(
   `@/assets/images/pages/parties/green-clock.svg?raw`
@@ -41,11 +46,65 @@ const { default: blueDrop } = await import(
 const { default: purpleDrop } = await import(
   `@/assets/images/pages/parties/drop-purple.svg?raw`
 );
+
+const birthdayFaqItems = [
+  {
+    question: "Where are Fizz Kidz birthday party venues located?",
+    answer:
+      "Fizz Kidz hosts kids birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What age group are Fizz Kidz birthday parties for?",
+    answer:
+      "Fizz Kidz birthday parties are designed for children aged 4 to 12 years, with creative hands-on activities, games and take-home creations.",
+  },
+  {
+    question: "How long does a Fizz Kidz birthday party run for?",
+    answer:
+      "Families can choose a 1.5 hour party where children make two creations, or a 2 hour party where children make three creations.",
+  },
+  {
+    question: "When do I choose my creations?",
+    answer: "You choose your creations 10 days before your child's party.",
+  },
+  {
+    question: "When do I let you know numbers?",
+    answer:
+      "You confirm numbers 10 days before your child's party. We only charge for the number of children who attend.",
+  },
+  {
+    question: "Can parents stay during the party?",
+    answer:
+      "Yes. Parents can stay during the party or use it as a drop-off party.",
+  },
+];
 ---
 
 <Layout
-  title="Book Kids Birthday Party Venue (Aged 4-12 Years) in Melbourne"
-  description="Fizz Kidz's Birthday Parties are the perfect and stress-free party for all boys and girls, aged 4 - 12, that your child and all their friends will love!"
+  title="Kids Birthday Party Venues Melbourne | Fizz Kidz"
+  description="Book creative kids birthday party venues in Melbourne for ages 4-12 at Fizz Kidz studios in Balwyn, Cheltenham, Essendon, Kingsville and Malvern."
+  schema={[
+    createServiceSchema({
+      name: "Kids Birthday Party Venues Melbourne",
+      description:
+        "Creative, hands-on kids birthday parties for children aged 4 to 12 at Fizz Kidz studios across Melbourne.",
+      url: "/birthday-parties/",
+      serviceType: "Kids birthday party venue",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/", birthdayFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+    ]),
+  ]}
 >
   <main>
     <div class="m-auto block max-w-[1380px] px-5 pt-4">
@@ -90,11 +149,44 @@ const { default: purpleDrop } = await import(
         >
           <span slot="title">Fizz Kidz Birthday Parties</span>
           <span slot="content"
-            >Fizz Kidz' Kids Birthday Parties are the perfect and stress-free
-            party for all boys and girls (aged 4 - 12) that your child and all
-            their friends will love!
+            >Fizz Kidz kids birthday parties are stress-free, high-energy and
+            hands-on, with creative party venues across Melbourne for children
+            aged 4 to 12.
           </span>
         </PageIntro>
+      </section>
+      <section class="mb-16 rounded-3xl bg-[#FFF5FB] p-6 md:mb-24 md:p-10">
+        <h2 class="font-lilita text-4xl text-[#F24DA1] md:text-5xl">
+          Kids birthday party venues in Melbourne
+        </h2>
+        <p class="mt-4 max-w-5xl font-gotham text-lg font-medium leading-8">
+          Looking for a kids birthday party venue in Melbourne that keeps the
+          children entertained and gives parents a stress-free experience? Fizz
+          Kidz parties include exclusive studio hire, two enthusiastic party
+          hosts, creative take-home activities, dancing games, invitations and
+          optional party food.
+        </p>
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl text-[#F24DA1]">Party themes</p>
+            <p class="mt-2 font-gotham font-medium">
+              Slime, science, glam, fairy, safari, unicorn, tie dye, Swiftie and
+              more.
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl text-[#F24DA1]">Locations</p>
+            <p class="mt-2 font-gotham font-medium">
+              Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios.
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl text-[#F24DA1]">Best for</p>
+            <p class="mt-2 font-gotham font-medium">
+              Creative birthday parties for children aged 4 to 12.
+            </p>
+          </div>
+        </div>
       </section>
       <PartyThemes />
       <section class="mt-16 md:mt-40">
@@ -211,7 +303,7 @@ const { default: purpleDrop } = await import(
       <Pricing />
       <PartyInformation partyPackage="Birthday" />
       <PartyPerks />
-      <PartyFaq />
+      <PartyFaq items={birthdayFaqItems} />
       <!-- <PartyPacks /> -->
     </div>
     <section class="relative mt-12 h-[450px]">

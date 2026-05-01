@@ -9,11 +9,63 @@ import tieDyePackage from "@/assets/images/pages/parties/packages/tie-dye.png";
 import Creations from "@/components/party-package-creations.astro";
 import TieDyePillow from "@/components/creations/tie-dye-pillow.astro";
 import TieDyeToteBags from "@/components/creations/tie-dye-tote-bags.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const tieDyeFaqItems = [
+  {
+    question: "Where can I book a tie dye birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs tie dye birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Tie Dye party?",
+    answer:
+      "Children can tie dye take-home items such as tote bags and pillow covers, depending on the party creations selected.",
+  },
+  {
+    question: "What age is a Tie Dye party best for?",
+    answer:
+      "Fizz Kidz Tie Dye parties are designed for children aged 4 to 12 years who love colour, craft, fashion and creative take-home activities.",
+  },
+  {
+    question: "Do kids take their tie dye creations home?",
+    answer:
+      "Yes. Every child takes home their tie dye creation after the party.",
+  },
+];
 ---
 
 <Layout
-  title="Book Your Tie Dye Kids Birthday Party in Melbourne"
-  description="A party package brimming with colour. Tie dye parties are sure to be memorable!"
+  title="Tie Dye Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids tie dye birthday party in Melbourne with colourful craft, tote bags, pillow covers, party games and take-home creations."
+  schema={[
+    createServiceSchema({
+      name: "Tie Dye Birthday Party Melbourne",
+      description:
+        "A colourful kids tie dye birthday party with hands-on craft, tote bags, pillow covers, party games and take-home creations.",
+      url: "/birthday-parties/tie-dye-parties/",
+      serviceType: "Kids tie dye birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/tie-dye-parties/", tieDyeFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "Tie Dye Parties", url: "/birthday-parties/tie-dye-parties/" },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Tie Dye">
     <PageIntro
@@ -28,14 +80,39 @@ import TieDyeToteBags from "@/components/creations/tie-dye-tote-bags.astro";
     >
       <span slot="title">Tie Dye Kids Birthday Party</span>
       <span slot="content">
-        Enjoy the process of Tie Dying your favourite items and take the item
-        home to enjoy!
+        Enjoy the process of tie dying colourful items and take your creation
+        home after the party.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Colourful tie dye parties for kids"
+      description="The Tie Dye party is a bright, hands-on birthday package for kids who love colour, craft and wearable or usable take-home creations. Children enjoy the tie dye process, play party games and leave with something they made themselves."
+      color="#F6BA33"
+      faqHeading="Tie dye party FAQs"
+      faqItems={tieDyeFaqItems}
+      highlights={[
+        {
+          title: "Colourful craft",
+          content:
+            "Kids get hands-on with tie dye techniques and create their own colourful party keepsake.",
+        },
+        {
+          title: "Take-home items",
+          content:
+            "Creations can include tie dye tote bags and pillow covers, depending on selections.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Tie Dye"
       image={tieDyePackage}
       imageAlt="Tie Dye Party Package"
+      topSpacing="compact"
     >
       <TieDyeToteBags flippable={false} slot="1" />
       <TieDyePillow flippable={false} slot="2" />

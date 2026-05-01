@@ -19,11 +19,63 @@ import SwiftieSlime from "@/components/creations/swiftie-slime.astro";
 import FluffySlimeBlue from "@/components/creations/fluffy-slime-blue.astro";
 import FrozenSparkleSlimeGreen from "@/components/creations/frozen-sparkle-slime-green.astro";
 import SlimeLab from "@/components/slime-lab.astro";
+import FaqAccordion from "@/components/react/faq-accordion";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const slimeFaqItems = [
+  {
+    question: "Where can I book a slime birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs slime birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What age are slime parties best for?",
+    answer:
+      "Fizz Kidz slime parties are designed for children aged 4 to 12 years who love getting creative and hands-on.",
+  },
+  {
+    question: "Do kids take their slime home?",
+    answer:
+      "Yes. Every child makes slime during the party and takes their creations home in their own Fizz Kidz party bag.",
+  },
+  {
+    question: "Can children customise their slime?",
+    answer:
+      "Yes. Children can choose colours, glitters and add-ins, and Slime Lab lets slime-obsessed kids design their personalised slime from scratch.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Slime Birthday Party in Melbourne | Fizz Kidz"
-  description="Our most popular party package - get ready to get messy!"
+  title="Slime Birthday Parties Melbourne | Fizz Kidz"
+  description="Book a kids slime birthday party in Melbourne at Fizz Kidz. Children make custom slime and take home their creations at our five studios."
+  schema={[
+    createServiceSchema({
+      name: "Slime Birthday Parties Melbourne",
+      description:
+        "Hands-on slime birthday parties for children aged 4 to 12 at Fizz Kidz studios across Melbourne.",
+      url: "/birthday-parties/slime-parties/",
+      serviceType: "Slime birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/slime-parties/", slimeFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "Slime Parties", url: "/birthday-parties/slime-parties/" },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Slime">
     <PageIntro
@@ -38,15 +90,56 @@ import SlimeLab from "@/components/slime-lab.astro";
     >
       <span slot="title">Kids Slime Birthday Parties</span>
       <span slot="content">
-        For all the slime lovers out there, we love slime just as much! Together
-        lets get messy and make the most perfect slimes!
+        For slime lovers, Fizz Kidz slime birthday parties in Melbourne are all
+        about colour, glitter, add-ins and hands-on messy fun.
       </span>
     </PageIntro>
+    <section class="m-auto mb-0 mt-20 block max-w-[1380px] px-5 md:mt-36">
+      <div class="rounded-3xl bg-[#F4EDFF] p-6 md:p-10">
+        <h2 class="font-lilita text-4xl text-[#9044E2] md:text-5xl">
+          A hands-on slime party kids can customise
+        </h2>
+        <p class="mt-4 max-w-5xl font-gotham text-lg font-medium leading-8">
+          Our slime party package is one of our most popular kids birthday party
+          options. Children make slime, choose colours and glitter, play dancing
+          games, and take their creations home. Slime parties are available at
+          our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios.
+        </p>
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl text-[#9044E2]">Best for</p>
+            <p class="mt-2 font-gotham font-medium">
+              Children aged 4 to 12 who love sensory, creative and messy play.
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl text-[#9044E2]">Take-home fun</p>
+            <p class="mt-2 font-gotham font-medium">
+              Every child leaves with their own slime creations.
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl text-[#9044E2]">Studios</p>
+            <p class="mt-2 font-gotham font-medium">
+              Book a slime party in Balwyn, Cheltenham, Essendon, Kingsville or
+              Malvern.
+            </p>
+          </div>
+        </div>
+        <div class="mt-10">
+          <h3 class="mb-4 font-lilita text-3xl text-[#9044E2]">
+            Slime party FAQs
+          </h3>
+          <FaqAccordion client:visible items={slimeFaqItems} />
+        </div>
+      </div>
+    </section>
     <Creations
       image={slimePackage}
       imageAlt="Slime Party Pacakge"
       partyPackage="Slime"
       hideLeftImage
+      topSpacing="compact"
     >
       <FairySlime slot="1" flippable={false} />
       <BirthdayCakeSlime slot="2" flippable={false} />

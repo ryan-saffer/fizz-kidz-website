@@ -22,17 +22,72 @@ import carousel3Image from "@/assets/images/pages/locations/essendon/essendon3.j
 import carousel4Image from "@/assets/images/pages/locations/essendon/essendon4.jpg";
 import carousel5Image from "@/assets/images/pages/locations/essendon/essendon5.jpg";
 import { menu } from "@/components/react/navigation/navigation-menu";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createLocalBusinessSchema,
+  createServiceSchema,
+  getStudio,
+} from "@/utils/seo";
+
+const studio = getStudio("essendon");
 
 const carousel1 = await getImage({ src: carousel1Image, format: "webp" });
 const carousel2 = await getImage({ src: carousel2Image, format: "webp" });
 const carousel3 = await getImage({ src: carousel3Image, format: "webp" });
 const carousel4 = await getImage({ src: carousel4Image, format: "webp" });
 const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
+
+const locationFaqItems = [
+  {
+    question: "Where is Fizz Kidz Essendon located?",
+    answer:
+      "Fizz Kidz Essendon is located at 75 Raleigh Street, Essendon VIC 3040.",
+  },
+  {
+    question: "What kids activities are available at Fizz Kidz Essendon?",
+    answer:
+      "Fizz Kidz Essendon offers kids birthday parties, school holiday programs and creative hands-on activities including slime, science, craft and take-home creations.",
+  },
+  {
+    question:
+      "How many children can Fizz Kidz Essendon accommodate for parties?",
+    answer:
+      "Fizz Kidz Essendon can accommodate up to 30 children at birthday parties.",
+  },
+  {
+    question: "Do parents stay for holiday programs?",
+    answer:
+      "Our holiday programs are designed as a drop-off experience. If a child feels more comfortable with a parent staying, they are welcome to do so.",
+  },
+  {
+    question: "Does Fizz Kidz accept the Child Care Subsidy (CCS)?",
+    answer:
+      "No. Fizz Kidz operates as an entertainment centre, which does not fall under the Child Care Subsidy.",
+  },
+];
 ---
 
 <Layout
-  title="Essendon | Fizz Kidz"
-  description="Essendon birthday parties, holiday programs, toddler programs and more!"
+  title="Kids Birthday Parties & Holiday Programs in Essendon | Fizz Kidz"
+  description="Visit Fizz Kidz Essendon for kids birthday parties, slime and science parties, school holiday programs and creative kids activities near Moonee Ponds."
+  schema={[
+    createLocalBusinessSchema("essendon"),
+    createServiceSchema({
+      name: "Kids Birthday Parties and Holiday Programs in Essendon",
+      description:
+        "Creative kids birthday parties, school holiday programs and hands-on activities at Fizz Kidz Essendon.",
+      url: "/locations/essendon/",
+      serviceType: "Kids birthday party venue and school holiday program",
+      areaServed: [studio.name, ...studio.nearbySuburbs],
+    }),
+    createFaqSchema("/locations/essendon/", locationFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Locations", url: "/locations/" },
+      { name: "Essendon", url: "/locations/essendon/" },
+    ]),
+  ]}
 >
   <div class="m-auto block max-w-[1380px] px-5 pt-4">
     <BreadcrumbWrapper
@@ -61,11 +116,54 @@ const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
     >
       <span slot="title">Fizz Kidz Essendon Studio</span>
       <span slot="content"
-        >Our Essendon studio is a vibrant, hands-on, light filled space where
-        kids unleash their creativity!
+        >Fizz Kidz Essendon is a vibrant kids party venue and holiday program
+        studio where children unleash their creativity through slime, science,
+        craft and take-home activities.
       </span>
     </PageIntro>
-    <p class="mt-36 text-center font-lilita text-5xl">
+    <section class="mt-36 rounded-3xl bg-[#F4EDFF] p-6 md:p-10">
+      <h2 class="font-lilita text-4xl text-[#9044E2] md:text-5xl">
+        Kids birthday parties and holiday programs in Essendon
+      </h2>
+      <p class="mt-4 max-w-5xl font-gotham text-lg font-medium leading-8">
+        Our Essendon studio is ideal for families looking for a kids party
+        venue, school holiday program or creative kids activity in Melbourne's
+        north-west. We regularly welcome families from Essendon, {
+          studio.nearbySuburbs.join(", ")
+        } and nearby suburbs.
+      </p>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <a
+          class="rounded-2xl bg-white p-5 shadow-around"
+          href="/birthday-parties/"
+        >
+          <p class="font-lilita text-2xl text-[#9044E2]">Birthday parties</p>
+          <p class="mt-2 font-gotham font-medium">
+            Stress-free slime, science, glam, fairy, safari, unicorn and tie dye
+            parties.
+          </p>
+        </a>
+        <a
+          class="rounded-2xl bg-white p-5 shadow-around"
+          href="/holiday-programs/"
+        >
+          <p class="font-lilita text-2xl text-[#9044E2]">Holiday programs</p>
+          <p class="mt-2 font-gotham font-medium">
+            Creative school holiday activities for kids aged 4 to 12.
+          </p>
+        </a>
+        <a
+          class="rounded-2xl bg-white p-5 shadow-around"
+          href="/birthday-parties/slime-parties/"
+        >
+          <p class="font-lilita text-2xl text-[#9044E2]">Slime parties</p>
+          <p class="mt-2 font-gotham font-medium">
+            One of our most popular hands-on party options.
+          </p>
+        </a>
+      </div>
+    </section>
+    <p class="mt-12 text-center font-lilita text-5xl md:mt-16">
       Creativity & fun in the heart of Essendon!
     </p>
     <section
@@ -80,7 +178,7 @@ const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
       </div>
       <div class="flex flex-col justify-center lg:w-1/2">
         <p class="font-bold">Fizz Kidz Essendon Studio</p>
-        <p>75 Ralight Street Essendon 3040</p>
+        <p>75 Raleigh Street, Essendon VIC 3040</p>
         <p class="mt-4 font-bold">Phone</p>
         <p><a href="tel:0390598144">(03) 9059 8144</a></p>
         <p class="mt-4 font-bold">Email</p>
@@ -319,38 +417,7 @@ const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
           alt="Three girls smiling"
         />
         <div class="w-full md:w-3/5">
-          <FaqAccordion
-            client:idle
-            items={[
-              {
-                question:
-                  "How many children can Fizz Kidz accommodate for parties?",
-                answer:
-                  "We accommodate up to 28 children, with a total venue capacity of 35 people.",
-              },
-              {
-                question: "Do parents stay for holiday programs?",
-                answer:
-                  "Our holiday programs are designed as a drop-off experience. However, if a child feels more comfortable with a parent staying, they are welcome to do so.",
-              },
-              {
-                question: "Does Fizz Kidz accept the Child Care Subsidy (CCS)?",
-                answer:
-                  "Unfortunately, no. Fizz Kidz operates as an entertainment center, which does not fall under the Child Care Subsidy.",
-              },
-              {
-                question: "Where are your Fizz Kidz locations?",
-                answer:
-                  "Fizz Kidz has multiple studio locations! Check out our website or contact us to find your nearest venue. ",
-              },
-              {
-                question:
-                  "How do I find more information about your Fizz Kidz birthday parties?",
-                answer:
-                  "We have lots of party themes for you to choose from! Click here to explore! ",
-              },
-            ]}
-          />
+          <FaqAccordion client:idle items={locationFaqItems} />
         </div>
       </div>
     </section>
