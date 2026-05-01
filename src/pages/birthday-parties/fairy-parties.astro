@@ -15,11 +15,63 @@ import FairyLipBalm from "@/components/creations/fairy-lip-balm.astro";
 import FairyBathBombs from "@/components/creations/fairy-bath-bombs.astro";
 import MarshmallowSlime from "@/components/creations/marshmallow-slime.astro";
 import FairyHairGel from "@/components/creations/fairy-hair-gel.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const fairyFaqItems = [
+  {
+    question: "Where can I book a fairy birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs fairy birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Fairy party?",
+    answer:
+      "Children can make magical take-home creations such as fairy wands, pixie glitter, bracelets, lip balm, fairy slime and bath bombs.",
+  },
+  {
+    question: "What age is a Fairy party best for?",
+    answer:
+      "Fizz Kidz Fairy parties are designed for children aged 4 to 12 years who love sparkle, magic, craft and imaginative play.",
+  },
+  {
+    question: "Do children take their fairy creations home?",
+    answer:
+      "Yes. Every child takes their Fizz Kidz creations home in their own party bag.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Fairy Birthday Party in Melbourne | Fizz Kidz"
-  description="A party package full of sparkles, magic and fairies!"
+  title="Fairy Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids fairy birthday party in Melbourne with magical crafts, fairy slime, wands, glitter, bracelets and take-home creations."
+  schema={[
+    createServiceSchema({
+      name: "Fairy Birthday Party Melbourne",
+      description:
+        "A magical kids fairy birthday party with wands, glitter, fairy slime, bracelets, bath bombs and take-home creations.",
+      url: "/birthday-parties/fairy-parties/",
+      serviceType: "Kids fairy birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/fairy-parties/", fairyFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "Fairy Parties", url: "/birthday-parties/fairy-parties/" },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Fairy">
     <PageIntro
@@ -27,16 +79,41 @@ import FairyHairGel from "@/components/creations/fairy-hair-gel.astro";
       subtitle="Welcome to the magical world of fairies!"
       type="image"
       image={fairyParty}
-      imageAlt="a purple butcket of glycerine cubes, with pretty colourful unciron soaps on top"
+      imageAlt="Fairy party craft creations"
       actionButtonText="Book a party"
       actionButtonPath="/birthday-parties/book-a-party/#book"
       color="pink"
     >
       <span slot="title">Fairy Kids Birthday Parties</span>
       <span slot="content">
-        Here we love everything sparkles, glitter and magic!
+        A magical kids birthday party full of sparkles, glitter, fairies and
+        creative take-home creations.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Magical fairy parties for kids"
+      description="The Fairy party is a whimsical birthday package for children who love sparkle, magic and imaginative craft. Kids make fairy-inspired creations, play party games and take home what they have made."
+      color="#F24DA2"
+      faqHeading="Fairy party FAQs"
+      faqItems={fairyFaqItems}
+      highlights={[
+        {
+          title: "Magical creations",
+          content:
+            "Kids can make fairy wands, pixie glitter, bracelets, lip balm, slime, bath bombs and more.",
+        },
+        {
+          title: "Imaginative fun",
+          content:
+            "A sparkly party package for children who love fairies, magic, colour and craft.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Fairy"
       image={fairy}

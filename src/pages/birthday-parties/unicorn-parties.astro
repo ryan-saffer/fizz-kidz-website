@@ -12,11 +12,66 @@ import UnicornCloudSlime from "@/components/creations/unicorn-cloud-slime.astro"
 import FairyWands from "@/components/creations/fairy-wands.astro";
 import SparklingLipBalm from "@/components/creations/sparkling-lip-balm.astro";
 import UnicornBathCrumble from "@/components/creations/unicorn-bath-crumble.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const unicornFaqItems = [
+  {
+    question: "Where can I book a unicorn birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs unicorn birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Unicorn party?",
+    answer:
+      "Children can make magical take-home creations such as fairy wands, sparkling lip balm, unicorn soap, unicorn bath bombs and unicorn cloud slime.",
+  },
+  {
+    question: "What age is a Unicorn party best for?",
+    answer:
+      "Fizz Kidz Unicorn parties are designed for children aged 4 to 12 years who love sparkle, magic, colour, slime and creative craft.",
+  },
+  {
+    question: "Do kids take their unicorn creations home?",
+    answer:
+      "Yes. Every child takes their Fizz Kidz creations home in their own party bag.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Unicorn Birthday Party in Melbourne | Fizz Kidz"
-  description="A party package full of sparkles, glitter and unicorns!"
+  title="Unicorn Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids unicorn birthday party in Melbourne with magical crafts, unicorn slime, wands, bath bombs, sparkle and take-home creations."
+  schema={[
+    createServiceSchema({
+      name: "Unicorn Birthday Party Melbourne",
+      description:
+        "A magical kids unicorn birthday party with unicorn slime, wands, bath bombs, sparkle and take-home creations.",
+      url: "/birthday-parties/unicorn-parties/",
+      serviceType: "Kids unicorn birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/unicorn-parties/", unicornFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      {
+        name: "Unicorn Parties",
+        url: "/birthday-parties/unicorn-parties/",
+      },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Unicorn">
     <PageIntro
@@ -24,16 +79,41 @@ import UnicornBathCrumble from "@/components/creations/unicorn-bath-crumble.astr
       subtitle="Welcome to the magical world of Unicorns!"
       type="image"
       image={unicornParty}
-      imageAlt="a purple butcket of glycerine cubes, with pretty colourful unciron soaps on top"
+      imageAlt="Unicorn birthday party creations"
       actionButtonText="Book a party"
       actionButtonPath="/birthday-parties/book-a-party/#book"
       color="pink"
     >
       <span slot="title">Unicorn Kids Birthday Parties</span>
       <span slot="content">
-        Here we love everything sparkles, glitter and magic!
+        A magical kids birthday party filled with unicorns, sparkle, slime,
+        glitter and creative take-home activities.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Magical unicorn parties for kids"
+      description="The Unicorn party is a colourful, sparkly birthday package for children who love unicorns, slime and magical craft. Kids make unicorn-inspired creations, play party games and take home what they have made."
+      color="#F24DA2"
+      faqHeading="Unicorn party FAQs"
+      faqItems={unicornFaqItems}
+      highlights={[
+        {
+          title: "Unicorn magic",
+          content:
+            "A bright, sparkly party package for kids who love unicorns, rainbows, glitter and colour.",
+        },
+        {
+          title: "Take-home creations",
+          content:
+            "Kids can make wands, lip balm, unicorn bath crumble, unicorn soap, bath bombs and unicorn cloud slime.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Unicorn"
       image={unicorn}

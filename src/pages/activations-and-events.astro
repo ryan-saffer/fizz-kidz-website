@@ -46,6 +46,7 @@ import PrimaryButton from "@/components/primary-button.astro";
 import ActivationsForm from "@/components/react/forms/activations-form";
 import Reviews from "@/components/reviews.astro";
 import Values from "@/components/values.astro";
+import { createBreadcrumbSchema, createServiceSchema } from "@/utils/seo";
 
 const aflLogoOptimised = await getImage({ src: aflLogo, format: "webp" });
 const brimbankLogoOptimised = await getImage({
@@ -141,8 +142,22 @@ const logos = [
 ---
 
 <Layout
-  title="Kids Activation & Events Specialist in Melbourne | Fizz Kidz"
-  description="Fizz Kidz runs activations and events across Australia, creating a space for children to create something special. Book us for your shopping center, corporate event or anywhere you need a little bit of Fizz!"
+  title="Kids Event Activations Melbourne | Fizz Kidz"
+  description="Book Fizz Kidz for kids event activations, shopping centre school holiday workshops, corporate family days and children's entertainment in Melbourne."
+  schema={[
+    createServiceSchema({
+      name: "Kids Event Activations Melbourne",
+      description:
+        "Kids event activations, shopping centre workshops, corporate family day entertainment and custom children's activities across Melbourne and Australia.",
+      url: "/activations-and-events/",
+      serviceType: "Kids event activation",
+      areaServed: ["Melbourne", "Victoria", "Australia"],
+    }),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Activations and Events", url: "/activations-and-events/" },
+    ]),
+  ]}
 >
   <main>
     <div class="m-auto block max-w-[1380px] px-5 pt-4">

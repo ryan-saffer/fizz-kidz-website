@@ -12,10 +12,16 @@ import Step from "@/components/step.astro";
 import forwardArrow from "@/assets/images/pages/parties/forward-arrow.png";
 import PrimaryButton from "@/components/primary-button.astro";
 import MixAndMatchParties from "@/components/mix-and-match-parties.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
 
 import { menu } from "../../components/react/navigation/navigation-menu";
 import AtHomePartyFaq from "@/components/at-home-party-faq.astro";
 import Values from "@/components/values.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
 
 const { default: greenClock } = await import(
   `@/assets/images/pages/parties/green-clock.svg?raw`
@@ -36,13 +42,52 @@ const { default: blueDrop } = await import(
 const { default: purpleDrop } = await import(
   `@/assets/images/pages/parties/drop-purple.svg?raw`
 );
+
+const atHomeFaqItems = [
+  {
+    question: "Where can Fizz Kidz run an at-home birthday party?",
+    answer:
+      "Fizz Kidz can run mobile kids birthday parties at your home or party venue in Melbourne, subject to availability and travel zone.",
+  },
+  {
+    question: "What do I need to provide?",
+    answer:
+      "You only need to provide a table for the children and access to water. Fizz Kidz brings the creation materials, table cloths and music speaker.",
+  },
+  {
+    question: "What party themes can I choose for an at-home party?",
+    answer:
+      "At-home parties can use Fizz Kidz creations from popular packages including slime, science, glam, fairy, safari, unicorn, tie dye and more, depending on availability.",
+  },
+  {
+    question: "How does payment work?",
+    answer:
+      "Fizz Kidz invoices for the number of children who actually make creations, with a minimum payment for 12 children.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Birthday Party at Your Home or Venue in Melbourne | Fizz Kidz"
-  description="We can come to you, and run a fabulous birthday party at your home or venue!"
+  title="Mobile Kids Birthday Parties Melbourne | Fizz Kidz"
+  description="Book a mobile kids birthday party at your home or venue in Melbourne. Fizz Kidz brings creative activities, hosts, games and take-home creations."
+  schema={[
+    createServiceSchema({
+      name: "Mobile Kids Birthday Parties Melbourne",
+      description:
+        "At-home and mobile kids birthday parties in Melbourne with Fizz Kidz hosts, creative activities, party games and take-home creations.",
+      url: "/birthday-parties/at-home-parties/",
+      serviceType: "Mobile kids birthday party",
+      areaServed: ["Melbourne", "Victoria"],
+    }),
+    createFaqSchema("/birthday-parties/at-home-parties/", atHomeFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "At Home Parties", url: "/birthday-parties/at-home-parties/" },
+    ]),
+  ]}
 >
-  <main class="m-auto block max-w-[1380px] px-5 pt-4">
+  <main class="m-auto flex max-w-[1380px] flex-col px-5 pt-4">
     <BreadcrumbWrapper
       client:idle
       items={[
@@ -69,17 +114,35 @@ const { default: purpleDrop } = await import(
     >
       <span slot="title">At Home Birthday Parties</span>
       <span slot="content">
-        Our fabulous Fizz Kidz party host will come to your home or a party
-        venue near you, and run a fantastic, stress-free party that the birthday
-        child, and their friends will love!
+        Our fabulous Fizz Kidz party host will come to your home or party venue
+        in Melbourne and run a creative, stress-free birthday party kids will
+        love.
       </span>
     </PageIntro>
-    <h3
-      class="m-auto mt-12 max-w-5xl text-center font-lilita text-2xl text-[#43D4F3] md:mt-48 md:text-3xl"
-    >
-    </h3>
-    <PartyThemes />
-    <section class="mt-16 md:mt-40">
+    <PartyPackageSeoSection
+      title="Mobile kids birthday parties at your home or venue"
+      description="Fizz Kidz brings the party to you with creative activities, hosts, games, table cloths, music and take-home creations. It is a strong option for families who want Fizz Kidz birthday party fun without booking one of our studios."
+      color="#9044E2"
+      highlights={[
+        {
+          title: "We come to you",
+          content:
+            "A Fizz Kidz host can run the party at your home or suitable party venue in Melbourne.",
+        },
+        {
+          title: "Popular creations",
+          content:
+            "Choose creative activities from popular Fizz Kidz party packages, including slime and other take-home creations.",
+        },
+        {
+          title: "Simple setup",
+          content:
+            "You provide a table and water access; we bring the materials, table cloths, speaker and party energy.",
+        },
+      ]}
+    />
+    <PartyThemes spacing="large" bottomSpacing="compact" />
+    <section class="mt-8 md:mt-12">
       <h2 class="mb-12 text-center font-lilita text-4xl md:mb-28 md:text-5xl">
         How it works
       </h2>
@@ -176,7 +239,7 @@ const { default: purpleDrop } = await import(
           </div>
         </Step>
       </div>
-      <div class="relative z-10 m-auto my-20 text-center">
+      <div class="relative z-10 m-auto my-10 text-center md:my-12">
         <PrimaryButton
           text="View all the creations here"
           path="/birthday-parties/creations/"
@@ -185,7 +248,7 @@ const { default: purpleDrop } = await import(
     </section>
     <section>
       <h6
-        class="mb-12 mt-20 text-center font-lilita text-4xl md:mb-16 md:mt-32 md:text-5xl"
+        class="mb-12 mt-10 text-center font-lilita text-4xl md:mb-16 md:mt-12 md:text-5xl"
       >
         At Home Party Pricing
       </h6>
@@ -320,8 +383,10 @@ const { default: purpleDrop } = await import(
         />
       </div>
     </section>
-    <AtHomePartyFaq />
+    <AtHomePartyFaq items={atHomeFaqItems} />
     <MixAndMatchParties />
-    <Values />
+    <div class="order-last">
+      <Values />
+    </div>
   </main>
 </Layout>

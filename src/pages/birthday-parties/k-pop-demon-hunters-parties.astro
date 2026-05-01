@@ -6,17 +6,76 @@ import PartyLayout from "@/layout/party-layout.astro";
 import kpopparty from "@/assets/images/pages/parties/k-pop-demon-hunters-party.png";
 import kpop from "@/assets/images/pages/parties/packages/k-pop-demon-hunters.png";
 import Creations from "@/components/party-package-creations.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
 import StarhexWands from "@/components/creations/starhex-wands.astro";
 import SquishyPockets from "@/components/creations/squishy-pockets.astro";
 import HendrixGlitterShine from "@/components/creations/hendrix-glitter-shine.astro";
 import GoldenSlime from "@/components/creations/golden-slime.astro";
 import StarlayClips from "@/components/creations/star-slay-clips.astro";
 import MoonBeamBracelets from "@/components/creations/moon-beam-bracelets.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const kpopFaqItems = [
+  {
+    question:
+      "Where can I book a K-Pop Demon Hunters birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs K-Pop Demon Hunters birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a K-Pop Demon Hunters party?",
+    answer:
+      "Children make themed take-home creations such as Starhex Wands, Squishy Pockets, Golden Slime, Star Slay Clips and Moon Beam Bracelets.",
+  },
+  {
+    question: "What age is this party best for?",
+    answer:
+      "Fizz Kidz K-Pop Demon Hunters parties are designed for children aged 4 to 12 years who love music, fantasy, craft and hands-on party activities.",
+  },
+  {
+    question: "Is this an official K-Pop Demon Hunters party?",
+    answer:
+      "This is a Fizz Kidz themed kids party package inspired by K-Pop energy, fantasy adventure and creative take-home activities.",
+  },
+];
 ---
 
 <Layout
-  title="Book a K-Pop Demon Hunters Birthday Party in Melbourne | Fizz Kidz"
-  description="A fun, easy and stress free K-Pop Demon Hunters Birthday Party"
+  title="K-Pop Demon Hunters Birthday Party Melbourne | Fizz Kidz"
+  description="Book a K-Pop Demon Hunters birthday party in Melbourne with themed crafts, golden slime, fantasy creations, party games and take-home activities."
+  schema={[
+    createServiceSchema({
+      name: "K-Pop Demon Hunters Birthday Party Melbourne",
+      description:
+        "A themed kids birthday party package with K-Pop energy, fantasy-inspired craft, golden slime and take-home creations.",
+      url: "/birthday-parties/k-pop-demon-hunters-parties/",
+      serviceType: "Kids themed birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema(
+      "/birthday-parties/k-pop-demon-hunters-parties/",
+      kpopFaqItems,
+    ),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      {
+        name: "K-Pop Demon Hunters Parties",
+        url: "/birthday-parties/k-pop-demon-hunters-parties/",
+      },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="K-Pop Demon Hunters">
     <PageIntro
@@ -24,21 +83,45 @@ import MoonBeamBracelets from "@/components/creations/moon-beam-bracelets.astro"
       subtitle="The ultimate K-Pop party experience!"
       type="image"
       image={kpopparty}
-      imageAlt="a purple butcket of glycerine cubes, with pretty colourful unciron soaps on top"
+      imageAlt="K-Pop Demon Hunters themed party creations"
       actionButtonText="Book a party"
       actionButtonPath="/birthday-parties/book-a-party/#book"
       color="purple"
     >
       <span slot="title">Kids K-Pop Demon Hunters Parties</span>
       <span slot="content">
-        Step into a world of magic and music where K-Pop energy meets fantasy
-        adventure!
+        Step into a kids birthday party where K-Pop energy meets fantasy
+        adventure, golden slime, themed craft and take-home creations.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="K-Pop Demon Hunters parties for kids"
+      description="This high-energy party package is built for kids who love music, colour, fantasy and creative activities. Children make themed creations, play party games and leave with their own K-Pop inspired take-home items."
+      color="#9044E2"
+      faqHeading="K-Pop party FAQs"
+      faqItems={kpopFaqItems}
+      highlights={[
+        {
+          title: "Trending theme",
+          content:
+            "A fun, current party package for kids who love K-Pop style, fantasy and bold creative activities.",
+        },
+        {
+          title: "Take-home creations",
+          content:
+            "Kids make themed crafts including slime, accessories and magical creations they can take home.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="K-Pop Demon Hunters"
       image={kpop}
-      imageAlt="Fairy Party Package"
+      imageAlt="K-Pop Demon Hunters party package creations"
     >
       <StarhexWands slot="1" flippable={false} />
       <SquishyPockets slot="2" flippable={false} />

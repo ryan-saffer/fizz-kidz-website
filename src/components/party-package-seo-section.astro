@@ -1,0 +1,59 @@
+---
+import FaqAccordion from "@/components/react/faq-accordion";
+
+type FaqItem = { question: string; answer: string };
+type Highlight = { title: string; content: string };
+
+const {
+  title,
+  description,
+  highlights,
+  faqHeading = "Party FAQs",
+  faqItems,
+  color = "#9044E2",
+} = Astro.props as {
+  title: string;
+  description: string;
+  highlights: Highlight[];
+  faqHeading?: string;
+  faqItems?: FaqItem[];
+  color?: string;
+};
+
+const hasFaqItems = faqItems && faqItems.length > 0;
+---
+
+<section
+  class="order-last m-auto mb-16 mt-8 block max-w-[1380px] px-5 md:mb-24 md:mt-12"
+>
+  <div class="rounded-3xl bg-[#F4EDFF] p-6 md:p-10">
+    <h2 class="font-lilita text-4xl md:text-5xl" style={{ color }}>
+      {title}
+    </h2>
+    <p class="mt-4 max-w-5xl font-gotham text-lg font-medium leading-8">
+      {description}
+    </p>
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      {
+        highlights.map((highlight) => (
+          <div class="rounded-2xl bg-white p-5 shadow-around">
+            <p class="font-lilita text-2xl" style={{ color }}>
+              {highlight.title}
+            </p>
+            <p class="mt-2 font-gotham font-medium">{highlight.content}</p>
+          </div>
+        ))
+      }
+    </div>
+    {
+      hasFaqItems && (
+        <div class="mt-10">
+          <h3 class="mb-4 font-lilita text-3xl" style={{ color }}>
+            {faqHeading}
+          </h3>
+          <FaqAccordion client:visible items={faqItems} />
+        </div>
+      )
+    }
+  </div>
+</section>

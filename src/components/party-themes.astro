@@ -9,9 +9,24 @@ import safari from "@/assets/images/pages/parties/packages/safari.png";
 import swiftie from "@/assets/images/pages/parties/packages/swiftie.png";
 import kpop from "@/assets/images/pages/parties/packages/k-pop-demon-hunters.png";
 import fluidBears from "@/assets/images/pages/parties/packages/fluid-bears-black.png";
+
+const { spacing = "default", bottomSpacing = "default" } = Astro.props as {
+  spacing?: "default" | "compact" | "large";
+  bottomSpacing?: "default" | "compact";
+};
+
+const spacingClass =
+  spacing === "large"
+    ? "mt-20 md:mt-36"
+    : spacing === "compact"
+      ? "mt-10 md:mt-14"
+      : "mt-12 md:mt-24";
+
+const bottomSpacingClass =
+  bottomSpacing === "compact" ? "mb-8 md:mb-12" : "mb-24";
 ---
 
-<section class="mt-12 md:mt-24">
+<section class={spacingClass}>
   <div class="mb-8 flex flex-col items-center gap-4 md:mb-16">
     <h3 class="text-center font-lilita text-5xl">Birthday Party Themes</h3>
     <h4
@@ -26,7 +41,10 @@ import fluidBears from "@/assets/images/pages/parties/packages/fluid-bears-black
     </p>
   </div>
   <div
-    class="mb-24 grid grid-cols-2 justify-center gap-y-4 min-[900px]:grid-cols-4"
+    class:list={[
+      bottomSpacingClass,
+      "grid grid-cols-2 justify-center gap-y-4 min-[900px]:grid-cols-4",
+    ]}
   >
     <PartyPackage
       title="Glam Parties"

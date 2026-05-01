@@ -16,11 +16,63 @@ import FairySlime from "@/components/creations/fairy-slime.astro";
 import UnicornBathCrumble from "@/components/creations/unicorn-bath-crumble.astro";
 import GlitterHairGel from "@/components/creations/glitter-hair-gel.astro";
 import TsBracelets from "@/components/creations/ts-bracelets.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const glamFaqItems = [
+  {
+    question: "Where can I book a kids glam birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs kids glam birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Glam party?",
+    answer:
+      "Children can make sparkly take-home creations such as lip balm, glitter face paint, bath salts, bracelets, glitter hair gel and more.",
+  },
+  {
+    question: "Is this a pamper party?",
+    answer:
+      "Yes. The Glam package is a creative kids pamper-style party focused on sparkle, colour, craft and take-home products.",
+  },
+  {
+    question: "What age is a Glam party best for?",
+    answer:
+      "Fizz Kidz Glam parties are designed for children aged 4 to 12 years who love glitter, colour, pamper products and creative craft.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Birthday Glam Birthday Party in Melbourne | Fizz Kidz"
-  description="This pamper party package is made for all things glamorous!"
+  title="Kids Glam Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids glam birthday party in Melbourne with sparkly pamper-style creations, glitter, lip balm, bracelets and take-home activities."
+  schema={[
+    createServiceSchema({
+      name: "Kids Glam Birthday Party Melbourne",
+      description:
+        "A creative kids glam and pamper-style birthday party with sparkly take-home creations, glitter, lip balm, bracelets and party games.",
+      url: "/birthday-parties/glam-parties/",
+      serviceType: "Kids glam birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/glam-parties/", glamFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      { name: "Glam Parties", url: "/birthday-parties/glam-parties/" },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Glam">
     <PageIntro
@@ -35,10 +87,34 @@ import TsBracelets from "@/components/creations/ts-bracelets.astro";
     >
       <span slot="title">Glam Kids Birthday Party</span>
       <span slot="content">
-        Make your very own sparkling and dazzling pamper products to take home
-        with you after the party!
+        A glam kids birthday party full of sparkle, glitter, pamper-style
+        creations and dazzling take-home products.
       </span>
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Glam and pamper-style parties for kids"
+      description="The Fizz Kidz Glam party is designed for kids who love colour, sparkle and creative pamper-style products. It is a hands-on birthday party where children make their own glittery creations and take them home after the celebration."
+      color="#F24DA2"
+      faqHeading="Glam party FAQs"
+      faqItems={glamFaqItems}
+      highlights={[
+        {
+          title: "Sparkly creations",
+          content:
+            "Kids can make lip balm, glitter face paint, bath salts, bracelets, bath bombs, hair gel and more.",
+        },
+        {
+          title: "Stress-free venue",
+          content:
+            "Fizz Kidz hosts run the activities, games and party structure so parents can relax.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations partyPackage="Glam" image={glitz} imageAlt="Three girls smiling">
       <SparklingLipBalm slot="1" flippable={false} />
       <GlitterFacePaint slot="2" flippable={false} />

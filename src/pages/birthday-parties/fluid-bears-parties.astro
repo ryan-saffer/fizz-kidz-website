@@ -12,11 +12,69 @@ import FluidBears3 from "@/components/creations/fluid-bears-3.astro";
 import FluidBears4 from "@/components/creations/fluid-bears-4.astro";
 import FluidBears5 from "@/components/creations/fluid-bears-5.astro";
 import FluidBears6 from "@/components/creations/fluid-bears-6.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const fluidBearsFaqItems = [
+  {
+    question: "Where can I book a Fluid Bears birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs Fluid Bears birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What is a Fluid Bears party?",
+    answer:
+      "A Fluid Bears party is a hands-on drip art party where children use colourful paint to design their own bear creation to take home.",
+  },
+  {
+    question: "What do kids take home?",
+    answer:
+      "Each child designs and takes home their own one-of-a-kind painted bear creation.",
+  },
+  {
+    question: "What age is a Fluid Bears party best for?",
+    answer:
+      "Fizz Kidz Fluid Bears parties are designed for children aged 4 to 12 years who love art, colour and hands-on creative activities.",
+  },
+];
 ---
 
 <Layout
-  title="Book a Kids Fluid Bears Birthday Party in Melbourne | Fizz Kidz"
-  description="Mesmerizing Drip Art Fun!"
+  title="Fluid Bears Birthday Party Melbourne | Fizz Kidz"
+  description="Book a kids Fluid Bears birthday party in Melbourne with colourful drip art, paint pouring, party games and take-home bear creations."
+  schema={[
+    createServiceSchema({
+      name: "Fluid Bears Birthday Party Melbourne",
+      description:
+        "A colourful kids drip art birthday party where children design their own painted Fluid Bear creation to take home.",
+      url: "/birthday-parties/fluid-bears-parties/",
+      serviceType: "Kids art birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema(
+      "/birthday-parties/fluid-bears-parties/",
+      fluidBearsFaqItems,
+    ),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      {
+        name: "Fluid Bears Parties",
+        url: "/birthday-parties/fluid-bears-parties/",
+      },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Fluid Bears">
     <PageIntro
@@ -24,22 +82,46 @@ import FluidBears6 from "@/components/creations/fluid-bears-6.astro";
       subtitle="Mesmerizing Drip Art Fun!"
       type="image"
       image={fluidBears}
-      imageAlt="hands holding colourful body glitter containers"
+      imageAlt="Fluid Bears drip art birthday party creations"
       actionButtonText="Book a party"
       actionButtonPath="/birthday-parties/book-a-party/#book"
       color="gold"
     >
       <span slot="title">Fluid Bears Kids Birthday Parties</span>
       <span slot="content"
-        >Design your very own awesome bear kingring by dripping vibrant paint
-        for a one-of-a-kind masterpiece that's yours to take home!</span
+        >Design your very own Fluid Bear with vibrant drip art for a colourful,
+        one-of-a-kind masterpiece that's yours to take home!</span
       >
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Fluid Bears drip art parties for kids"
+      description="Fluid Bears parties are perfect for children who love art, colour and hands-on creativity. Kids use vibrant paint to design their own bear creation, making this a memorable art birthday party with a take-home masterpiece."
+      color="#F6BA33"
+      faqHeading="Fluid Bears party FAQs"
+      faqItems={fluidBearsFaqItems}
+      highlights={[
+        {
+          title: "Drip art fun",
+          content:
+            "Children drizzle, drop and paint their bear their way using colourful fluid art techniques.",
+        },
+        {
+          title: "Take-home bear",
+          content:
+            "Every child leaves with their own unique Fluid Bear creation.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Fluid Bears"
-      caption="Drizzle, Drop ad Paint your Bear your way!"
+      caption="Drizzle, drop and paint your bear your way!"
       image={fluidBearsPackage}
-      imageAlt="Safari Party Package"
+      imageAlt="Fluid Bears party package creations"
       blackBackground
     >
       <FluidBears1 slot="1" flippable={false} />

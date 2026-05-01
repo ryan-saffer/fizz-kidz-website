@@ -11,7 +11,6 @@ import { getImage, Image } from "astro:assets";
 import CardWithImage from "@/components/card-with-image.astro";
 import ImageCarousel from "@/components/react/image-carousel";
 import Reviews from "@/components/reviews.astro";
-import blueWave from "@/assets/images/pages/locations/blue-wave.svg";
 import Values from "@/components/values.astro";
 import FaqAccordion from "@/components/react/faq-accordion";
 import faq from "@/assets/images/pages/parties/faq.png";
@@ -22,19 +21,74 @@ import carousel3Image from "@/assets/images/pages/locations/malvern/malvern3.jpg
 import carousel4Image from "@/assets/images/pages/locations/malvern/malvern4.jpg";
 import carousel5Image from "@/assets/images/pages/locations/malvern/malvern5.jpg";
 import { menu } from "@/components/react/navigation/navigation-menu";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createLocalBusinessSchema,
+  createServiceSchema,
+  getStudio,
+} from "@/utils/seo";
+
+const studio = getStudio("malvern");
 
 const carousel1 = await getImage({ src: carousel1Image, format: "webp" });
 const carousel2 = await getImage({ src: carousel2Image, format: "webp" });
 const carousel3 = await getImage({ src: carousel3Image, format: "webp" });
 const carousel4 = await getImage({ src: carousel4Image, format: "webp" });
 const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
+
+const locationFaqItems = [
+  {
+    question: "Where is Fizz Kidz Malvern located?",
+    answer:
+      "Fizz Kidz Malvern is located at 20 Glenferrie Road, Malvern VIC 3144.",
+  },
+  {
+    question: "What kids activities are available at Fizz Kidz Malvern?",
+    answer:
+      "Fizz Kidz Malvern offers kids birthday parties, school holiday programs and creative hands-on activities including slime, science, craft and take-home creations.",
+  },
+  {
+    question:
+      "How many children can Fizz Kidz Malvern accommodate for parties?",
+    answer:
+      "Fizz Kidz Malvern can accommodate up to 28 children at birthday parties.",
+  },
+  {
+    question: "Do parents stay for holiday programs?",
+    answer:
+      "Our holiday programs are designed as a drop-off experience. If a child feels more comfortable with a parent staying, they are welcome to do so.",
+  },
+  {
+    question: "Does Fizz Kidz accept the Child Care Subsidy (CCS)?",
+    answer:
+      "No. Fizz Kidz operates as an entertainment centre, which does not fall under the Child Care Subsidy.",
+  },
+];
 ---
 
 <Layout
-  title="Malvern | Fizz Kidz"
-  description="Malvern birthday parties, holiday programs, toddler programs and more!"
+  title="Kids Birthday Parties & Holiday Programs in Malvern | Fizz Kidz"
+  description="Visit Fizz Kidz Malvern for kids birthday parties, slime and science parties, school holiday programs and creative kids activities near Armadale and Prahran."
+  schema={[
+    createLocalBusinessSchema("malvern"),
+    createServiceSchema({
+      name: "Kids Birthday Parties and Holiday Programs in Malvern",
+      description:
+        "Creative kids birthday parties, school holiday programs and hands-on activities at Fizz Kidz Malvern.",
+      url: "/locations/malvern/",
+      serviceType: "Kids birthday party venue and school holiday program",
+      areaServed: [studio.name, ...studio.nearbySuburbs],
+    }),
+    createFaqSchema("/locations/malvern/", locationFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Locations", url: "/locations/" },
+      { name: "Malvern", url: "/locations/malvern/" },
+    ]),
+  ]}
 >
-  <div class="m-auto block max-w-[1380px] px-5 pt-4">
+  <div class="m-auto flex max-w-[1380px] flex-col px-5 pt-4">
     <BreadcrumbWrapper
       client:idle
       items={[
@@ -61,10 +115,55 @@ const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
     >
       <span slot="title">Fizz Kidz Malvern Studio</span>
       <span slot="content"
-        >Filled with colour, laughter and fun, Fizz Kidz Malvern brings joy to
-        every child who enters!
+        >Fizz Kidz Malvern is a colourful kids party venue and holiday program
+        studio for birthday celebrations, slime, science, craft and hands-on
+        creative fun.
       </span>
     </PageIntro>
+    <section
+      class="order-last mt-16 rounded-3xl bg-[#F4EDFF] p-6 md:mt-24 md:p-10"
+    >
+      <h2 class="font-lilita text-4xl text-[#9044E2] md:text-5xl">
+        Kids birthday parties and holiday programs in Malvern
+      </h2>
+      <p class="mt-4 max-w-5xl font-gotham text-lg font-medium leading-8">
+        Our Malvern studio is ideal for families looking for a kids party venue,
+        school holiday program or creative kids activity in Melbourne's inner
+        south-east. We regularly welcome families from Malvern, {
+          studio.nearbySuburbs.join(", ")
+        } and nearby suburbs.
+      </p>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <a
+          class="rounded-2xl bg-white p-5 shadow-around"
+          href="/birthday-parties/"
+        >
+          <p class="font-lilita text-2xl text-[#9044E2]">Birthday parties</p>
+          <p class="mt-2 font-gotham font-medium">
+            Stress-free slime, science, glam, fairy, safari, unicorn and tie dye
+            parties.
+          </p>
+        </a>
+        <a
+          class="rounded-2xl bg-white p-5 shadow-around"
+          href="/holiday-programs/"
+        >
+          <p class="font-lilita text-2xl text-[#9044E2]">Holiday programs</p>
+          <p class="mt-2 font-gotham font-medium">
+            Creative school holiday activities for kids aged 4 to 12.
+          </p>
+        </a>
+        <a
+          class="rounded-2xl bg-white p-5 shadow-around"
+          href="/birthday-parties/slime-parties/"
+        >
+          <p class="font-lilita text-2xl text-[#9044E2]">Slime parties</p>
+          <p class="mt-2 font-gotham font-medium">
+            One of our most popular hands-on party options.
+          </p>
+        </a>
+      </div>
+    </section>
     <p class="mt-36 text-center font-lilita text-5xl">
       Creativity & fun in the heart of Malvern!
     </p>
@@ -222,92 +321,6 @@ const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
       />
     </section>
   </div>
-  <Image
-    src={blueWave}
-    alt="blue background wave"
-    class="left-0 right-0 w-screen"
-  />
-  <div class="bg-[#43D4F3]">
-    <div class="m-auto block max-w-[1380px] px-5 py-4">
-      <p class="h2 text-lg font-bold">
-        THE ULTIMATE KIDS PARTY AND HOLIDAY PROGRAM VENUE IN MALVERN, MELBOURNE
-        VIC
-      </p>
-      <p class="h2 mt-2">
-        Welcome to Fizz Kidz - Malvern's Most Creative Kids Party & Activity
-        Venue
-      </p>
-      <p class="mt-2">
-        Located in the heart of <strong>Malvern, Melbourne VIC</strong>, Fizz
-        Kidz is the go-to destination for
-        <strong
-          >fun, hands-on kids' parties and exciting school holiday programs.
-        </strong> Our bright and energetic studio is designed to <strong
-          >spark creativity and deliver unforgettable experiences,</strong
-        > making every visit full of <strong>
-          laughter, learning, and interactive fun.
-        </strong>
-      </p>
-      <p class="h2 mt-4 text-lg font-bold">
-        Unforgettable Kids' Birthday Parties at Fizz Kidz Malvern
-      </p>
-      <p>
-        Looking for the <strong>best kids' party venue in Malvern?</strong> Fizz
-        Kidz specializes in <strong>creative birthday parties</strong>, where
-        kids can <strong
-          >make slime, mix bath bombs, design tie-dye creations, and more!</strong
-        > Our <strong>high-energy party hosts</strong> ensure a seamless and engaging
-        experience, with plenty of fun activities, party games, and take-home creations
-        for every child.
-      </p>
-      <p class="h2 mt-4 text-lg font-bold">
-        Your Go-To School Holiday Program in Malvern
-      </p>
-      <p>
-        Fizz Kidz <strong>holiday programs</strong> keep kids entertained with hands-on,
-        themed activities like <strong
-          >science experiments, arts and crafts, and sensory</strong
-        > play. Perfect for keeping kids engaged, inspired, and having fun during
-        the school break!
-      </p>
-      <p class="h2 mt-4 text-lg font-bold">
-        A Fun-Filled Venue for Kids' Activities in Malvern
-      </p>
-      <p>
-        Beyond birthday parties and holiday programs, our Malvern studio is the
-        perfect place for <strong
-          >kids' workshops, incursions, and special events.</strong
-        >
-        Whether you're looking for a <strong
-          >stress-free party experience</strong
-        > or a creative activity to keep little hands busy, Fizz Kidz has something
-        for everyone.
-      </p><p class="h2 mt-4 text-lg font-bold">
-        Join the Fun at Fizz Kidz Malvern!
-      </p>
-      <p>
-        We invite you to <strong>discover the magic of Fizz Kidz</strong> — where
-        kids can explore, create, and celebrate in a vibrant, hands-on environment.
-        Whether you're planning a <strong
-          >birthday party, school holiday activity, or special event,</strong
-        >
-        we're here to make it <strong
-          >exciting, fun, and completely hassle-free.</strong
-        >
-      </p>
-      <p class="h2 mt-4 text-lg font-bold">Contact Us</p>
-      <p>
-        Visit <strong>Fizz Kidz Malvern, Melbourne VIC,</strong> or get in touch
-        to book your next <strong>party, workshop, or holiday program.</strong> Let's
-        create something amazing together!
-      </p>
-    </div>
-  </div>
-  <Image
-    src={blueWave}
-    alt="blue background wave"
-    class="left-0 right-0 -mt-1 w-screen rotate-180"
-  />
   <div class="m-auto block max-w-[1380px] px-5 pt-4">
     <section class="md:my-18 my-12">
       <h6 class="mb-4 text-center font-lilita text-4xl md:text-5xl">
@@ -320,38 +333,7 @@ const carousel5 = await getImage({ src: carousel5Image, format: "webp" });
           alt="Three girls smiling"
         />
         <div class="w-full md:w-3/5">
-          <FaqAccordion
-            client:idle
-            items={[
-              {
-                question:
-                  "How many children can Fizz Kidz accommodate for parties?",
-                answer:
-                  "We accommodate up to 28 children, with a total venue capacity of 35 people.",
-              },
-              {
-                question: "Do parents stay for holiday programs?",
-                answer:
-                  "Our holiday programs are designed as a drop-off experience. However, if a child feels more comfortable with a parent staying, they are welcome to do so.",
-              },
-              {
-                question: "Does Fizz Kidz accept the Child Care Subsidy (CCS)?",
-                answer:
-                  "Unfortunately, no. Fizz Kidz operates as an entertainment center, which does not fall under the Child Care Subsidy.",
-              },
-              {
-                question: "Where are your Fizz Kidz locations?",
-                answer:
-                  "Fizz Kidz has multiple studio locations! Check out our website or contact us to find your nearest venue. ",
-              },
-              {
-                question:
-                  "How do I find more information about your Fizz Kidz birthday parties?",
-                answer:
-                  "We have lots of party themes for you to choose from! Click here to explore! ",
-              },
-            ]}
-          />
+          <FaqAccordion client:idle items={locationFaqItems} />
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import Header from "@/layout/header.astro";
 import Footer from "@/layout/footer.astro";
 import { ClientRouter } from "astro:transitions";
 import LoadingIndicator from "astro-loading-indicator/component";
+import { createSchemaGraph, absoluteUrl, type JsonLd } from "@/utils/seo";
 // import { HolidayProgramDiscountDialog } from "@/components/react/holiday-program-discount-dialog";
 // import { getImage } from "astro:assets";
 // import discountImage from "@/assets/images/holiday-program-discount-dialog/discount-image.png";
@@ -13,11 +14,18 @@ type Props = {
   title: string;
   description: string;
   noIndex?: boolean;
+  schema?: JsonLd | JsonLd[];
 };
 
-const { title, description, noIndex = false } = Astro.props;
+const { title, description, noIndex = false, schema = [] } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = absoluteUrl("/open-graph/home.jpg");
+const pageSchema = Array.isArray(schema) ? schema : [schema];
+const schemaJson = JSON.stringify(createSchemaGraph(pageSchema)).replace(
+  /</g,
+  "\\u003c",
+);
 
 // const discountImageOptimised = await getImage({
 //   src: discountImage,
@@ -79,13 +87,17 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/open-graph/home.jpg" />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="/open-graph/home.jpg" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="A child smiling" />
     <link rel="canonical" href={canonicalUrl} />
+    <script is:inline type="application/ld+json" set:html={schemaJson} />
 
     <ClientRouter />
   </head>

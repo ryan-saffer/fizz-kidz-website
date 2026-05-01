@@ -6,20 +6,72 @@ import PartyLayout from "@/layout/party-layout.astro";
 import taylorSwiftParty from "@/assets/images/pages/parties/taylor-swift-party.jpg";
 import taylorSwiftPackage from "@/assets/images/pages/parties/packages/swiftie.png";
 import Creations from "@/components/party-package-creations.astro";
+import PartyPackageSeoSection from "@/components/party-package-seo-section.astro";
 import TsBathBombs from "@/components/creations/ts-bath-bombs.astro";
 import TsBracelets from "@/components/creations/ts-bracelets.astro";
-import TsButterflySoap from "@/components/creations/ts-butterfly-soap.astro";
 import TsFacePaint from "@/components/creations/ts-face-paint.astro";
-import TsGoldSlime from "@/components/creations/ts-gold-slime.astro";
 import TsLipBalm from "@/components/creations/ts-lip-balm.astro";
 import TsMidnightsSlime from "@/components/creations/ts-midnights-slime.astro";
 import TsRainbowBathBombs from "@/components/creations/ts-rainbow-bath-bombs.astro";
-import TsScrunchies from "@/components/creations/ts-scrunchies.astro";
+import {
+  createBreadcrumbSchema,
+  createFaqSchema,
+  createServiceSchema,
+} from "@/utils/seo";
+
+const swiftieFaqItems = [
+  {
+    question: "Where can I book a Swiftie birthday party in Melbourne?",
+    answer:
+      "Fizz Kidz runs Swiftie and Taylor Swift-inspired birthday parties at our Balwyn, Cheltenham, Essendon, Kingsville and Malvern studios across Melbourne.",
+  },
+  {
+    question: "What do kids make at a Swiftie party?",
+    answer:
+      "Children can make themed take-home creations such as bracelets, bath bombs, slime, lip balm and glitter face paint.",
+  },
+  {
+    question: "Is this an official Taylor Swift party?",
+    answer:
+      "This is a Fizz Kidz Swiftie-inspired kids party package for fans who love sparkle, music energy, friendship bracelets and creative take-home activities.",
+  },
+  {
+    question: "What age is a Swiftie party best for?",
+    answer:
+      "Fizz Kidz Swiftie parties are designed for children aged 4 to 12 years who love music, sparkle, craft and creative party activities.",
+  },
+];
 ---
 
 <Layout
-  title="Taylor Swift Kids Birthday Party Packages in Melbourne"
-  description="As obsessed with Taylor Swift as we are? This party package is perfect for all Swiftie's out there!"
+  title="Swiftie Birthday Party Melbourne | Fizz Kidz"
+  description="Book a Swiftie birthday party in Melbourne with friendship-style bracelets, glitter, slime, bath bombs, party games and take-home creations."
+  schema={[
+    createServiceSchema({
+      name: "Swiftie Birthday Party Melbourne",
+      description:
+        "A Swiftie-inspired kids birthday party with bracelets, glitter, slime, bath bombs, party games and take-home creations.",
+      url: "/birthday-parties/taylor-swift-parties/",
+      serviceType: "Kids themed birthday party",
+      areaServed: [
+        "Melbourne",
+        "Balwyn",
+        "Cheltenham",
+        "Essendon",
+        "Kingsville",
+        "Malvern",
+      ],
+    }),
+    createFaqSchema("/birthday-parties/taylor-swift-parties/", swiftieFaqItems),
+    createBreadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Birthday Parties", url: "/birthday-parties/" },
+      {
+        name: "Swiftie Parties",
+        url: "/birthday-parties/taylor-swift-parties/",
+      },
+    ]),
+  ]}
 >
   <PartyLayout partyPackage="Taylor Swift">
     <PageIntro
@@ -27,17 +79,41 @@ import TsScrunchies from "@/components/creations/ts-scrunchies.astro";
       subtitle="Join us for the best Swiftie Party!"
       type="image"
       image={taylorSwiftParty}
-      imageAlt="a purple butcket of glycerine cubes, with pretty colourful unciron soaps on top"
+      imageAlt="Swiftie birthday party creations"
       actionButtonText="Book a party"
       actionButtonPath="/birthday-parties/book-a-party/#book"
       color="purple"
     >
       <span slot="title">Taylor Swift Kids Birthday Party</span>
       <span slot="content"
-        >Make your very own sparkling and dazzling Swiftie creations to take
-        home with you after the party!</span
+        >Make your very own sparkling and dazzling Swiftie-inspired creations to
+        take home with you after the party!</span
       >
     </PageIntro>
+    <PartyPackageSeoSection
+      title="Swiftie-inspired parties for kids"
+      description="This party package is for kids who love music, sparkle, friendship-style bracelets and creative take-home activities. Fizz Kidz hosts lead the party structure so children can make, dance, play games and celebrate."
+      color="#9044E2"
+      faqHeading="Swiftie party FAQs"
+      faqItems={swiftieFaqItems}
+      highlights={[
+        {
+          title: "Fan favourite theme",
+          content:
+            "A bright, sparkly party package for kids who love Swiftie-style creative activities.",
+        },
+        {
+          title: "Take-home creations",
+          content:
+            "Kids can make bracelets, slime, bath bombs, lip balm, glitter face paint and more.",
+        },
+        {
+          title: "Melbourne studios",
+          content:
+            "Available at Fizz Kidz Balwyn, Cheltenham, Essendon, Kingsville and Malvern.",
+        },
+      ]}
+    />
     <Creations
       partyPackage="Taylor Swift"
       image={taylorSwiftPackage}
