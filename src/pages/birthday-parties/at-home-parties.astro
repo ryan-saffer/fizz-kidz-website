@@ -87,7 +87,7 @@ const atHomeFaqItems = [
     ]),
   ]}
 >
-  <main class="m-auto block max-w-[1380px] px-5 pt-4">
+  <main class="m-auto flex max-w-[1380px] flex-col px-5 pt-4">
     <BreadcrumbWrapper
       client:idle
       items={[
@@ -141,8 +141,8 @@ const atHomeFaqItems = [
         },
       ]}
     />
-    <PartyThemes spacing="compact" />
-    <section class="mt-16 md:mt-40">
+    <PartyThemes spacing="large" bottomSpacing="compact" />
+    <section class="mt-8 md:mt-12">
       <h2 class="mb-12 text-center font-lilita text-4xl md:mb-28 md:text-5xl">
         How it works
       </h2>
@@ -239,7 +239,7 @@ const atHomeFaqItems = [
           </div>
         </Step>
       </div>
-      <div class="relative z-10 m-auto my-20 text-center">
+      <div class="relative z-10 m-auto my-10 text-center md:my-12">
         <PrimaryButton
           text="View all the creations here"
           path="/birthday-parties/creations/"
@@ -248,7 +248,7 @@ const atHomeFaqItems = [
     </section>
     <section>
       <h6
-        class="mb-12 mt-20 text-center font-lilita text-4xl md:mb-16 md:mt-32 md:text-5xl"
+        class="mb-12 mt-10 text-center font-lilita text-4xl md:mb-16 md:mt-12 md:text-5xl"
       >
         At Home Party Pricing
       </h6>
@@ -385,6 +385,8 @@ const atHomeFaqItems = [
     </section>
     <AtHomePartyFaq items={atHomeFaqItems} />
     <MixAndMatchParties />
-    <Values />
+    <div class="order-last">
+      <Values />
+    </div>
   </main>
 </Layout>

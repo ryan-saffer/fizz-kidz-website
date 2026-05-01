@@ -97,7 +97,7 @@ const schemaJson = JSON.stringify(createSchemaGraph(pageSchema)).replace(
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content="A child smiling" />
     <link rel="canonical" href={canonicalUrl} />
-    <script type="application/ld+json" set:html={schemaJson} />
+    <script is:inline type="application/ld+json" set:html={schemaJson} />
 
     <ClientRouter />
   </head>
