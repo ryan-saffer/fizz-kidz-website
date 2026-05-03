@@ -1,0 +1,18 @@
+---
+import FlipCreation from "../flip-creation.astro";
+
+import creation from "@/assets/images/creations/snake-potions.png";
+
+type Props = {
+  flippable?: boolean;
+};
+
+const { flippable = true } = Astro.props;
+---
+
+<FlipCreation
+  flippable={flippable}
+  image={creation}
+  text={["Slithering Snake Potions"]}
+  color="green"
+/>
